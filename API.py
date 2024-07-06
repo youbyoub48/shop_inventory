@@ -1,4 +1,4 @@
-import json
+import json, datetime
 
 from os.path import exists
 
@@ -32,7 +32,8 @@ def add_product(products:dict,log:list,id:str):
         return False
     
     products[id][1] = products[id][1]+1
-    log.append(["+", id, products[id][0], products[id][2]])
+    date = datetime.datetime.now()
+    log.append(["+", id, products[id][0], products[id][2], str(date.date()), f"{date.hour}:{date.minute}"])
     save(products,log)
     return True
 
@@ -46,7 +47,8 @@ def remove_product(products:dict,log:list,id:str):
         return False
     
     products[id][1] = products[id][1]-1
-    log.append(["-", id, products[id][0], products[id][2]])
+    date = datetime.datetime.now()
+    log.append(["-", id, products[id][0], products[id][2], str(date.date()), f"{date.hour}:{date.minute}"])
     save(products,log)
     return True
 
@@ -72,4 +74,4 @@ def save(products:dict,log:list):
 
 
 if __name__ == "__main__":
-    remove_product(products,log,"1234")
+    add_product(products,log,"1234")
