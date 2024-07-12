@@ -17,12 +17,12 @@ else:
     log = []
 
 
-def register_product(products:dict,log:list,id:str,name:str,price:float):
+def register_product(products:dict,log:list,id:str,name:str,sellprice:float, purchaseprice:float):
     if products.get(id,-1) != -1:
         print("the product already exist")
         return False
     
-    products[id] = [name,0,price] #[Name of the product,number of products in stock,price of the product]
+    products[id] = [name,0,sellprice,purchaseprice] #[Name, Number in stock, Sell price, Purchase price]
     save(products,log)
     return True
 
@@ -33,7 +33,7 @@ def add_product(products:dict,log:list,id:str):
     
     products[id][1] = products[id][1]+1
     date = datetime.datetime.now()
-    log.append(["+", id, products[id][0], products[id][2], str(date.date()), f"{date.hour}:{date.minute}"])
+    log.append(["+", id, products[id][0], products[id][2], products[id][3], str(date.date()), f"{date.hour}:{date.minute}"])
     save(products,log)
     return True
 
@@ -48,7 +48,7 @@ def remove_product(products:dict,log:list,id:str):
     
     products[id][1] = products[id][1]-1
     date = datetime.datetime.now()
-    log.append(["-", id, products[id][0], products[id][2], str(date.date()), f"{date.hour}:{date.minute}"])
+    log.append(["-", id, products[id][0], products[id][2], products[id][3], str(date.date()), f"{date.hour}:{date.minute}"])
     save(products,log)
     return True
 
