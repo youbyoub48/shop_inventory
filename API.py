@@ -72,6 +72,15 @@ def save(products:dict,log:list):
     with open("log.json","w") as f:
         json.dump(log,f,indent=4)
 
+def modify_product(products:dict,log:list,id:str,name:str,nb:int,sellprice:float, purchaseprice:float):
+    if products.get(id,-1) == -1:
+        print("the product do not exist please register the product before")
+        return False
+    
+    products[id] = [name,nb,sellprice,purchaseprice] #[Name, Number in stock, Sell price, Purchase price]
+    save(products,log)
+    return True
+
 
 if __name__ == "__main__":
-    add_product(products,log,"1234")
+    modify_product(products,log,"1234","ecran",1,50,25)
