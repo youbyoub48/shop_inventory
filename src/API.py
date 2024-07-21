@@ -2,19 +2,21 @@ import json, datetime
 
 from os.path import exists
 
-if exists("inventory.json"):
-    with open("inventory.json","r") as f:
-        products = json.load(f)
+def load():
+    if exists("inventory.json"):
+        with open("inventory.json","r") as f:
+            products = json.load(f)
 
-else:
-    products = {}
+    else:
+        products = {}
 
-if exists("log.json"):
-    with open("log.json","r") as f:
-        log = json.load(f)
+    if exists("log.json"):
+        with open("log.json","r") as f:
+            log = json.load(f)
 
-else:
-    log = []
+    else:
+        log = []
+    return products,log
 
 
 def register_product(products:dict,log:list,id:str,name:str,sellprice:float, purchaseprice:float):
@@ -37,7 +39,7 @@ def add_product(products:dict,log:list,id:str):
     save(products,log)
     return True
 
-def remove_product(products:dict,log:list,id:str):
+def remove_product(products:dict,log:list,id:str,payment:str):
     if products.get(id,-1) == -1:
         print("the product do not exist please register the product before")
         return False
@@ -48,7 +50,7 @@ def remove_product(products:dict,log:list,id:str):
     
     products[id][1] = products[id][1]-1
     date = datetime.datetime.now()
-    log.append(["-", id, products[id][0], products[id][2], products[id][3], str(date.date()), f"{date.hour}:{date.minute}"])
+    log.append(["-", id, products[id][0], products[id][2], products[id][3], str(date.date()), f"{date.hour}:{date.minute}"], payment)
     save(products,log)
     return True
 
@@ -81,6 +83,14 @@ def modify_product(products:dict,log:list,id:str,name:str,nb:int,sellprice:float
     save(products,log)
     return True
 
+def get_product(products:dict,log:list,id:str):
+    if products.get(id,-1) == -1:
+        print("the product do not exist please register the product before")
+        return False
+    
+    return products[id]
+
 
 if __name__ == "__main__":
+    products,log = load()
     modify_product(products,log,"1234","ecran",1,50,25)
