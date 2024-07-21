@@ -17,10 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from inventory_api.views import register, add
+from inventory_api.views import register, add, remove, delete, get, modify, list_
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/register", register),
     path("api/add", add),
+    path("api/remove", remove),
+    path("api/delete", delete),
+    path("api/get", get),
+    path("api/modify", modify),
+    path("api/list", list_)
 ]

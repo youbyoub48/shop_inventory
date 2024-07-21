@@ -35,7 +35,10 @@ def add_product(products:dict,log:list,id:str):
     
     products[id][1] = products[id][1]+1
     date = datetime.datetime.now()
-    log.append(["+", id, products[id][0], products[id][2], products[id][3], str(date.date()), f"{date.hour}:{date.minute}"])
+    minute = date.minute
+    if minute < 10:
+        minute = "0"+str(minute)
+    log.append(["+", id, products[id][0], products[id][2], products[id][3], str(date.date()), f"{date.hour}:{minute}"])
     save(products,log)
     return True
 
@@ -50,7 +53,10 @@ def remove_product(products:dict,log:list,id:str,payment:str):
     
     products[id][1] = products[id][1]-1
     date = datetime.datetime.now()
-    log.append(["-", id, products[id][0], products[id][2], products[id][3], str(date.date()), f"{date.hour}:{date.minute}"], payment)
+    minute = date.minute
+    if minute < 10:
+        minute = "0"+str(minute)
+    log.append(["-", id, products[id][0], products[id][2], products[id][3], str(date.date()), f"{date.hour}:{minute}", payment])
     save(products,log)
     return True
 
@@ -83,7 +89,7 @@ def modify_product(products:dict,log:list,id:str,name:str,nb:int,sellprice:float
     save(products,log)
     return True
 
-def get_product(products:dict,log:list,id:str):
+def get_product(products:dict,id:str):
     if products.get(id,-1) == -1:
         print("the product do not exist please register the product before")
         return False
