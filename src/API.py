@@ -19,12 +19,12 @@ def load():
     return products,log
 
 
-def register_product(products:dict,log:list,id:str,name:str,sellprice:float, purchaseprice:float):
+def register_product(products:dict,log:list,id:str,name:str,sellprice:float,purchaseprice:float,link:str):
     if products.get(id,-1) != -1:
         print("the product already exist")
         return False
     
-    products[id] = [name,0,sellprice,purchaseprice] #[Name, Number in stock, Sell price, Purchase price]
+    products[id] = [name,0,sellprice,purchaseprice,link] #[Name, Number in stock, Sell price, Purchase price, link of the product web page]
     save(products,log)
     return True
 
@@ -80,12 +80,12 @@ def save(products:dict,log:list):
     with open("log.json","w") as f:
         json.dump(log,f,indent=4)
 
-def modify_product(products:dict,log:list,id:str,name:str,nb:int,sellprice:float, purchaseprice:float):
+def modify_product(products:dict,log:list,id:str,name:str,nb:int,sellprice:float,purchaseprice:float,link:str):
     if products.get(id,-1) == -1:
         print("the product do not exist please register the product before")
         return False
     
-    products[id] = [name,nb,sellprice,purchaseprice] #[Name, Number in stock, Sell price, Purchase price]
+    products[id] = [name,nb,sellprice,purchaseprice,link] #[Name, Number in stock, Sell price, Purchase price, link of the product web page]
     save(products,log)
     return True
 

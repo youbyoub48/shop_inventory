@@ -7,12 +7,12 @@ import API
 @csrf_exempt
 def register(request):
     if request.method == "POST":
-        product = [request.POST.get("id"),request.POST.get("name"),request.POST.get("sellprice"),request.POST.get("purchaseprice")]
+        product = [request.POST.get("id"),request.POST.get("name"),request.POST.get("sellprice"),request.POST.get("purchaseprice"),request.POST.get("link")]
         if None in product:
             return HttpResponse("404")
         
         products,log = API.load()
-        return HttpResponse(API.register_product(products,log,product[0],product[1],product[2],product[3]))
+        return HttpResponse(API.register_product(products,log,product[0],product[1],product[2],product[3],product[4]))
     return HttpResponse("404")
 
 @csrf_exempt
@@ -63,12 +63,12 @@ def get(request):
 @csrf_exempt
 def modify(request):
     if request.method == "POST":
-        product = [request.POST.get("id"),request.POST.get("name"),request.POST.get("nb"),request.POST.get("sellprice"),request.POST.get("purchaseprice")]
+        product = [request.POST.get("id"),request.POST.get("name"),request.POST.get("nb"),request.POST.get("sellprice"),request.POST.get("purchaseprice"),request.POST.get("link")]
         if None in product:
             return HttpResponse("404")
         
         products,log = API.load()
-        return HttpResponse(API.modify_product(products,log,product[0],product[1],product[2],product[3],product[4]))
+        return HttpResponse(API.modify_product(products,log,product[0],product[1],product[2],product[3],product[4],product[5]))
     return HttpResponse("404")
 
 @csrf_exempt
