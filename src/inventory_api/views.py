@@ -11,6 +11,13 @@ def register(request):
         if None in product:
             return HttpResponse("404")
         
+        product[2] = API.strToNumber(product[2])
+        product[3] = API.strToNumber(product[3])
+
+        if False in product:
+            print("Not number")
+            return HttpResponse(False)
+        
         products,log = API.load()
         return HttpResponse(API.register_product(products,log,product[0],product[1],product[2],product[3],product[4]))
     return HttpResponse("404")
@@ -67,11 +74,18 @@ def modify(request):
         if None in product:
             return HttpResponse("404")
         
+        product[2] = API.strToNumber(product[2])
+        product[3] = API.strToNumber(product[3])
+        product[4] = API.strToNumber(product[4])
+
+        if False in product:
+            print("Not number")
+            return HttpResponse(False)
+        
         products,log = API.load()
         return HttpResponse(API.modify_product(products,log,product[0],product[1],product[2],product[3],product[4],product[5]))
     return HttpResponse("404")
 
-@csrf_exempt
 def list_(request):
     products,log = API.load()
     return JsonResponse(products);

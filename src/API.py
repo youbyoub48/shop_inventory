@@ -96,6 +96,16 @@ def get_product(products:dict,id:str):
     
     return products[id]
 
+def strToNumber(number:str):
+    if number.isdigit():
+        return int(number)
+    
+    number = number.replace(",",".")
+
+    if number.replace(".","").isdigit() and number.count(".") == 1:
+        return float(number)
+    
+    return False
 
 if __name__ == "__main__":
     products,log = load()
