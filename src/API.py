@@ -105,7 +105,7 @@ def strToNumber(number:str):
     if number.replace(".","").isdigit() and number.count(".") == 1:
         return float(number)
     
-    return False
+    return None
 
 if __name__ == "__main__":
     products,log = load()

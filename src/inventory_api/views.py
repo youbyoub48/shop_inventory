@@ -78,7 +78,7 @@ def modify(request):
         product[3] = API.strToNumber(product[3])
         product[4] = API.strToNumber(product[4])
 
-        if False in product:
+        if None in product:
             print("Not number")
             return HttpResponse(False)
         
