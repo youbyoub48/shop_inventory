@@ -22,7 +22,7 @@ def load():
 def register_product(products:dict,log:list,id:str,name:str,sellprice:float,purchaseprice:float,link:str):
     if products.get(id,-1) != -1:
         print("the product already exist")
-        return False
+        return "the product already exist"
     
     products[id] = [name,0,sellprice,purchaseprice,link] #[Name, Number in stock, Sell price, Purchase price, link of the product web page]
     save(products,log)
@@ -31,7 +31,7 @@ def register_product(products:dict,log:list,id:str,name:str,sellprice:float,purc
 def add_product(products:dict,log:list,id:str):
     if products.get(id,-1) == -1:
         print("the product do not exist please register the product before")
-        return False
+        return "the product do not exist please register the product before"
     
     products[id][1] = products[id][1]+1
     date = datetime.datetime.now()
@@ -45,11 +45,11 @@ def add_product(products:dict,log:list,id:str):
 def remove_product(products:dict,log:list,id:str,payment:str):
     if products.get(id,-1) == -1:
         print("the product do not exist please register the product before")
-        return False
+        return "the product do not exist please register the product before"
     
     if products[id][1] <= 0:
         print("you can't go under 0 you have surely forgot to add this product")
-        return False
+        return "you can't go under 0 you have surely forgot to add this product"
     
     products[id][1] = products[id][1]-1
     date = datetime.datetime.now()
@@ -63,7 +63,7 @@ def remove_product(products:dict,log:list,id:str,payment:str):
 def delete_product(products:dict,log:list,id:str):
     if products.get(id,-1) == -1:
         print("the product do not exist please register the product before")
-        return False
+        return "the product do not exist please register the product before"
     
     products.pop(id)
     save(products,log)
@@ -83,7 +83,7 @@ def save(products:dict,log:list):
 def modify_product(products:dict,log:list,id:str,name:str,nb:int,sellprice:float,purchaseprice:float,link:str):
     if products.get(id,-1) == -1:
         print("the product do not exist please register the product before")
-        return False
+        return "the product do not exist please register the product before"
     
     products[id] = [name,nb,sellprice,purchaseprice,link] #[Name, Number in stock, Sell price, Purchase price, link of the product web page]
     save(products,log)

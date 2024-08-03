@@ -16,7 +16,7 @@ def register(request):
 
         if False in product:
             print("Not number")
-            return HttpResponse(False)
+            return HttpResponse("Not number")
         
         products,log = API.load()
         return HttpResponse(API.register_product(products,log,product[0],product[1],product[2],product[3],product[4]))
@@ -80,7 +80,7 @@ def modify(request):
 
         if None in product:
             print("Not number")
-            return HttpResponse(False)
+            return HttpResponse("Not number")
         
         products,log = API.load()
         return HttpResponse(API.modify_product(products,log,product[0],product[1],product[2],product[3],product[4],product[5]))
